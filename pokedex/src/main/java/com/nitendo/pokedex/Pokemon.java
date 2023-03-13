@@ -1,20 +1,20 @@
 package com.nitendo.pokedex;
 
+import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.*;
+
+@Entity
 public class Pokemon {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String nome;
     private String especie;
     private String tipo;
     private int nivel;
-    private int id;
 
-    public Pokemon(String nome, String especie, String tipo, int nivel) {
-        this.nome = nome;
-        this.especie = especie;
-        this.tipo = tipo;
-        this.nivel = nivel;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -34,7 +34,7 @@ public class Pokemon {
         return nivel;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,5 +52,12 @@ public class Pokemon {
 
     public void setNivel(int nivel) {
         this.nivel = nivel;
+    }
+
+    public void atualizar(Pokemon pokemon) {
+        this.nome = pokemon.getNome();
+        this.especie = pokemon.getEspecie();
+        this.tipo = pokemon.getTipo();
+        this.nivel = pokemon.getNivel();
     }
 }
